@@ -7,19 +7,38 @@ public class Polynomial{
 	public int[] powers;
 
 	// CONSTRUCTOR 1
-	public Polynomial(){
-		this.coeff = new double[] {0};
-		this.powers = new int[] {0};
+	public Polynomial()
+	{
+		this.coeff = null;
+		this.powers = null;
 	}
 
 	// CONSTRUCTOR 2
 	public Polynomial(double[] coeff, int[] powers)
 	{
-		this.coeff = coeff;
-		this.powers = powers;
+		if (coeff.length == 0) 
+		{
+            this.coeff = null;
+            this.powers = null;
+		}
+		else
+		{
+			this.coeff = new double[coeff.length];
+        	this.powers = new int[powers.length];
+        	for (int i = 0; i < coeff.length; i++) 
+			{
+				if (coeff[i] != 0)
+				{
+					this.coeff[i] = coeff[i];
+            		this.powers[i] = powers[i];
+				}
+        	}
+		}
 	}
 
-	public Polynomial(File file) throws IOException {
+	// CONSTRUCTOR 3
+	public Polynomial(File file) throws IOException 
+	{
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String line = reader.readLine();
 		reader.close();
@@ -27,33 +46,42 @@ public class Polynomial{
 		String[] terms;
 		terms = line.split("(?=[+-])");
 
-		double[] parsedCoefficients = new double[terms.length];
-		int[] parsedExponents = new int[terms.length];
+		double[] parsedCoeffs = new double[terms.length];
+		int[] parsedPows = new int[terms.length];
 
 		String term;
 
 		for (int i = 0; i < terms.length; i++) {
 			term = terms[i];
-			int caretIndex = term.indexOf('x');
+			int ind = term.indexOf('x');
 
-			if (caretIndex != -1) 
+			if (ind != -1) 
 			{
-				parsedCoefficients[i] = Double.parseDouble(term.substring(0, caretIndex));
-				parsedExponents[i] = Integer.parseInt(term.substring(caretIndex + 1));
+				parsedCoeffs[i] = Double.parseDouble(term.substring(0, ind));
+				parsedPows[i] = Integer.parseInt(term.substring(ind + 1));
 			} 
 			else
 			{
-				parsedCoefficients[i] = Double.parseDouble(term);
-				parsedExponents[i] = 0;
+				parsedCoeffs[i] = Double.parseDouble(term);
+				parsedPows[i] = 0;
 			}
 		}
 
-		this.coeff = parsedCoefficients;
-		this.powers = parsedExponents;
+		this.coeff = parsedCoeffs;
+		this.powers = parsedPows;
 	}
 
 	public Polynomial add(Polynomial p)
 	{
+		if(this.coeff == null)
+		{
+			return p;
+		}
+		if(p.coeff == null)
+		{
+			return this;
+		}
+
 		int length = HighestExp(p.powers) + 1;
 
 		double[] newCoeff = new double[length];
@@ -79,6 +107,11 @@ public class Polynomial{
 	
 	public double evaluate(double x) 
 	{
+		if (this.coeff == null)
+		{
+			System.out.println("null Polynomial!");
+			return 0;
+		}
 		double ans = 0;
 		for(int i = 0; i < coeff.length; i++)
 		{
@@ -89,13 +122,21 @@ public class Polynomial{
 	
 	public boolean hasRoot(double x) 
 	{
+		if (this.coeff == null)	
+		{
+			System.out.println("null Polynomial!");
+			return false;
+		}	
 		return this.evaluate(x) == 0;
 	}
 
 	public Polynomial multiply(Polynomial p) 
 	{		
+		if(this.coeff == null || p.coeff == null)
+		{
+			return new Polynomial();
+		}
 		int newLength = HighestExp(p.powers) + 1;
-
 		double[] newCoeff = new double[newLength];
 		int[] newPowers = new int[newLength];
 

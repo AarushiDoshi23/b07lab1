@@ -32,6 +32,8 @@ public class Driver {
 		int[] pow7 = {3, 1};
 		Polynomial poly7 = new Polynomial(coeff7, pow7);
 
+		Polynomial poly8 = new Polynomial();
+
 		System.out.println("---------------TESTS---------------");
 
 		System.out.println("----------ADD----------");
@@ -60,74 +62,96 @@ public class Driver {
 		System.out.println("Received: " + Arrays.toString(sum36.coeff) + " and " + Arrays.toString(sum36.powers));
 		System.out.println();
 
+		System.out.println("TEST 5: ADD POLY1 AND POLY8");
+		Polynomial sum18 =  poly1.add(poly8);
+		System.out.println("Expected: [13.0, 2.0] and [0, 5]");
+		System.out.println("Received: " + Arrays.toString(sum18.coeff) + " and " + Arrays.toString(sum18.powers));
+		System.out.println();
+
 		System.out.println("----------MULTIPLY----------");
 
-		System.out.println("TEST 5: MULTIPLY POLY1 AND POLY2");
+		System.out.println("TEST 6: MULTIPLY POLY1 AND POLY2");
 		Polynomial mult12 =  poly1.multiply(poly2);
 		System.out.println("Expected: [13.0, 13.0, -13.0, 2.0, 2.0, -2.0] and [0, 2, 3, 5, 7, 8]");
 		System.out.println("Received: " + Arrays.toString(mult12.coeff) + " and " + Arrays.toString(mult12.powers));
 		System.out.println();
 
-		System.out.println("TEST 6: MULTIPLY POLY2 AND POLY4");
+		System.out.println("TEST 7: MULTIPLY POLY2 AND POLY4");
 		Polynomial mult24 = poly2.multiply(poly4);
 		System.out.println("Expected: [1.0, 9.0, 1.0, 8.0, -20.0, 5.0, -11.0, 15.0, -5.0, -1.0, 1.0, -10.0, -10.0, 10.0] and [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21, 23, 24]");
 		System.out.println("Received: " +  Arrays.toString(mult24.coeff) + " and " + Arrays.toString(mult24.powers));
 		System.out.println();
 
-		System.out.println("TEST 7: MULTIPLY POLY2 AND POLY5");
+		System.out.println("TEST 8: MULTIPLY POLY2 AND POLY5");
 		Polynomial mult25 = poly2.multiply(poly5);
 		System.out.println("Expected: [-5.6, -9.8, 5.6, -4.2, 4.2] and [0, 2, 3, 4, 5]");
 		System.out.println("Received: " +  Arrays.toString(mult25.coeff) + " and " + Arrays.toString(mult25.powers));
 		System.out.println();
 		
-		System.out.println("TEST 8: MULTIPLY POLY5 AND POLY1");
+		System.out.println("TEST 9: MULTIPLY POLY5 AND POLY1");
 		Polynomial mult51 = poly5.multiply(poly1);
 		System.out.println("Expected: [-72.8, -54.6, -11.2, -8.4] and [0, 2, 5, 7]");
 		System.out.println("Received: " +  Arrays.toString(mult51.coeff) + " and " + Arrays.toString(mult51.powers));
 		System.out.println();
 
+		System.out.println("TEST 10: MULTIPLY POLY2 AND POLY8");
+		Polynomial mult28 = poly2.multiply(poly8);
+		System.out.println("Expected: null and null");
+		System.out.println("Received: " +  Arrays.toString(mult28.coeff) + " and " + Arrays.toString(mult28.powers));
+		System.out.println();
+
 		System.out.println("----------EVALUATE----------");
 
-		System.out.println("TEST 9: EVALUATE POLY1 AT 2");
+		System.out.println("TEST 11: EVALUATE POLY1 AT 2");
 		System.out.println("Expected: 77.0");
 		System.out.println("Received: " +  poly1.evaluate(2));
 		System.out.println();
 
-		System.out.println("TEST 10: EVALUATE POLY3 AT 2");
+		System.out.println("TEST 12: EVALUATE POLY3 AT 2");
 		System.out.println("Expected: 172952.0");
 		System.out.println("Received: " +  poly3.evaluate(2));
 		System.out.println();
 
-		System.out.println("TEST 11: EVALUATE POLY5 AT 2.7");
+		System.out.println("TEST 13: EVALUATE POLY5 AT 2.7");
 		System.out.println("Expected: -36.218");
 		System.out.println("Received: " +  poly5.evaluate(2.7));
 		System.out.println();
 
-		System.out.println("TEST 12: EVALUATE POLY2 AT 1.2");
+		System.out.println("TEST 14: EVALUATE POLY2 AT 1.2");
 		System.out.println("Expected: 0.7120000000000002");
 		System.out.println("Received: " +  poly2.evaluate(1.2));
 		System.out.println();
 
+		System.out.println("TEST 15: EVALUATE POLY8 AT 1");
+		System.out.println("Expected: 0.0");
+		System.out.println("Received: " +  poly8.evaluate(1));
+		System.out.println();
+
 		System.out.println("----------HAS ROOT----------");
 
-		System.out.println("TEST 13: HAS ROOT POLY1 AT 1");
+		System.out.println("TEST 16: HAS ROOT POLY1 AT 1");
 		System.out.println("Expected: false");
 		System.out.println("Received: " +  poly1.hasRoot(1));
 		System.out.println();
 
-		System.out.println("TEST 14: HAS ROOT POLY5 AT -1");
+		System.out.println("TEST 17: HAS ROOT POLY5 AT -1");
 		System.out.println("Expected: false");
 		System.out.println("Received: " +  poly5.hasRoot(-1));
 		System.out.println();
 
-		System.out.println("TEST 15: HAS ROOT POLY7 AT 0");
+		System.out.println("TEST 18: HAS ROOT POLY7 AT 0");
 		System.out.println("Expected: true");
 		System.out.println("Received: " +  poly7.hasRoot(0));
 		System.out.println();
 
+		System.out.println("TEST 19: HAS ROOT POLY8 AT 4");
+		System.out.println("Expected: false");
+		System.out.println("Received: " +  poly8.hasRoot(4));
+		System.out.println();
+
 		System.out.println("----------READ FROM FILE----------");
 
-		System.out.println("TEST 16: READ FROM test1.txt");
+		System.out.println("TEST 20: READ FROM test1.txt");
 		File f1 = new File("test1.txt");
 		try 
 		{
@@ -141,7 +165,7 @@ public class Driver {
 			e.printStackTrace();
 		}
 
-		System.out.println("TEST 17: READ FROM test2.txt");
+		System.out.println("TEST 21: READ FROM test2.txt");
 		File f2 = new File("test2.txt");
 		try 
 		{
@@ -157,7 +181,7 @@ public class Driver {
 	
 		System.out.println("----------SAVE TO FILE----------");
 
-		System.out.println("TEST 18: SAVE TO FILE POLY2");
+		System.out.println("TEST 22: SAVE TO FILE POLY2");
 		try
 		{
 			poly2.saveToFile("output.txt");
