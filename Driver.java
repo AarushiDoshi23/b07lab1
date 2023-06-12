@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.Arrays;
 
 public class Driver {
-	public static void main(String [] args) {
-
+	public static void main(String [] args) 
+	{
 		double[] coeff1 = {13, 2};
 		int[] pow1 = {0, 5};
 		Polynomial poly1 = new Polynomial(coeff1, pow1);
@@ -35,6 +35,22 @@ public class Driver {
 		Polynomial poly8 = new Polynomial();
 
 		System.out.println("---------------TESTS---------------");
+
+		File p9 = new File("poly9.txt");
+
+		try
+		{
+			Polynomial poly9 = new Polynomial(p9);
+			System.out.println("Poly9");
+			System.out.println("Expected: [15.0, 2.0, -9.8] and [2, 5, 7]");
+			System.out.println("Received: " + Arrays.toString(poly9.coeff) + " and " + Arrays.toString(poly9.powers));
+			System.out.println();
+
+		}
+		catch (IOException e) 
+		{
+            System.out.println(e.getMessage());
+		}
 
 		System.out.println("----------ADD----------");
 
